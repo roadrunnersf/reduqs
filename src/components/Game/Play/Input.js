@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {addGuess, updateDucks} from 'redux/score'
+import {addGuess} from 'redux/score'
 
-export const Input = () => {
+export const Input = ({setStatus}) => {
 	const [guess, setGuess] = useState('')
 	const dispatch = useDispatch()
 
@@ -21,8 +21,10 @@ export const Input = () => {
 				time: new Date().toLocaleTimeString(),
 			})
 		)
-		dispatch(updateDucks(undefined))
 		setGuess('')
+
+		setStatus('result')
+
 		event.preventDefault()
 	}
 

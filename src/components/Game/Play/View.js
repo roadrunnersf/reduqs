@@ -1,12 +1,15 @@
 import React from 'react'
 import random from 'lodash/random'
+import {useSelector} from 'react-redux'
 
 import {Canvas} from 'styled/Play/Canvas'
 import {Duck} from 'styled/Play/Duck'
 
+import {useNextPlayScreen} from 'hooks/useNextPlayScreen'
+
 // this page is not hooked up to redux or being displayed yet
 
-const createDucks = (
+const createDucksArray = (
 	numberOfDucks = 20,
 	xMin = 0,
 	xMax = 500,
@@ -20,12 +23,16 @@ const createDucks = (
 	return coords
 }
 
-export const View = () => {
+export const View = ({setStatus}) => {
+	const currentDucks = useSelector(state => state.currentDucks)
+
+	useNextPlayScreen({setStatus, nextView: 'input', timerMS: 2000})
+
 	return (
 		<>
 			<p>This is the Play page</p>
 			<Canvas>
-				{createDucks(random(10, 30)).map((coord, index) => (
+				{createDucksArray(currentDucks).map((coord, index) => (
 					<Duck
 						left={random(coord.xMin, coord.xMax)}
 						top={random(coord.yMin, coord.yMax)}

@@ -10,7 +10,8 @@ export const Game = () => {
 
 	useEffect(() => {
 		dispatch(updateDucks(random(10, 30)))
-	}, [])
+	}, []) // eslint-disable-line
+
 	return (
 		<>
 			<p>This is the game page</p>
